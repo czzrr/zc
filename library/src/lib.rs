@@ -8,6 +8,7 @@ mod library;
 use crate::book::Book;
 use crate::library::Library;
 
+// Run the interactive terminal
 pub fn run(filename: &str) -> Result<(), Box<dyn Error>> {
     let books = read_books(filename)?;
     let mut library = Library{ books };
@@ -17,6 +18,7 @@ pub fn run(filename: &str) -> Result<(), Box<dyn Error>> {
     println!("{}", library);
     println!("----------------------");
 
+    // Read and perform queries until user types 'quit'
     loop {
         let mut user_input = String::new();
         io::stdin().read_line(&mut user_input)?;
@@ -31,11 +33,13 @@ pub fn run(filename: &str) -> Result<(), Box<dyn Error>> {
         }
     }
 
+    // Write result of session to file
     write_books(filename, library.books)?;
 
     Ok(())
 }
 
+// Write new state of library to file
 fn write_books(filename: &str, books: Vec<Book>) -> Result<(), Box<dyn Error>> {
     let mut contents = String::new();
     for book in &books {
@@ -47,6 +51,7 @@ fn write_books(filename: &str, books: Vec<Book>) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+// Read library from file
 fn read_books(filename: &str) -> Result<Vec<Book>, Box<dyn Error>> {
     let contents: String = fs::read_to_string(filename)?;
     
@@ -62,6 +67,7 @@ fn read_books(filename: &str) -> Result<Vec<Book>, Box<dyn Error>> {
     books.ok_or("Error when creating books".into())
 }
 
+// Process query with some error handling on wrong arguments
 fn process_query(query: &str, library: &mut Library) -> Result<(), &'static str> {
     let mut query = query.split_whitespace();
 

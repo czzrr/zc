@@ -1,10 +1,10 @@
 Rust In Action
 0
-Available
+Unavailable
 
 C++ Concurrency In Action
 1
-Unavailable
+Available
 
 The C Programming Language
 2

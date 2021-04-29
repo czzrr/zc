@@ -7,7 +7,7 @@ pub struct Library {
 }
 
 impl Library {
-
+    // Borrow book by changing its status from available to unavailable
     pub fn borrow_book(&mut self, id: u32) -> Result<(), &'static str> {
         let idx = self.get_book_idx(id).ok_or("ID does not exist")?;
         
@@ -21,6 +21,7 @@ impl Library {
         }
     }
 
+    // Return book by changing its status from unavailable to available
     pub fn return_book(&mut self, id: u32) -> Result<(), &'static str> {
         let idx = self.get_book_idx(id).ok_or("ID does not exist")?;
         
