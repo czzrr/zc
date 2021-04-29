@@ -17,12 +17,9 @@ int main() {
 
     if (conn) {
         list_connection_domains(conn);
+        virConnectClose(conn);
     } else {
         std::cout << "Could not connect\n";
-    }
-
-    if (conn) {
-        virConnectClose(conn);
     }
 
     return 0;
@@ -58,9 +55,9 @@ void print_domain(virDomainPtr domain) {
     state_to_str(*state, state_str);
 
     // Show id as "-" in case domain is not running
-    const char* id_str = is_valid_id(*state) ? std::to_string(id).c_str() : "-";
+    std::string id_str = is_valid_id(*state) ? std::to_string(id) : "-";
 
-    
+    // Print domain info
     std::cout << std::left << std::setw(6) << id_str
         << std::setw(16) << name
         << std::setw(20) << state_str << "\n";

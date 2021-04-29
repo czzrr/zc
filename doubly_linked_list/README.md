@@ -1,0 +1,3 @@
+Terminal session:
+
+![](doublylinkedlist.png)
